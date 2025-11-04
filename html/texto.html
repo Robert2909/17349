@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="Dame un nombre" id="nombre">
+    <button onclick="llamar()">Enviar</button>
+    <button onclick="llamarPost()">Enviar Post</button>
+    <script>
+        function llamar() {
+            // Llamar a nuestro backend
+            let nombre = document.getElementById('nombre').value
+            // let url = 'http://localhost:8080/saludar' + '/' +encodeURIComponent(nombre)
+            let url = 'http://localhost:8080/saludarget'
+            fetch(url)
+            .then(response => {
+                // return response.text()
+                return response.json()
+            })
+            .then(datos => {
+                console.log('Datos: ', datos);
+            })
+        }
+        function llamarPost() {
+            let url = 'http://localhost:8080/saludarpost'
+            let nombre = document.getElementById('nombre').value
+            fetch(url, {
+                method: "POST",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ contenido: nombre })
+            })
+            .then(response => response.text())
+        }
+    </script>
+</body>
+</html>

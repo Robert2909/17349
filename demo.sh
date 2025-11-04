@@ -1,0 +1,1 @@
+docker run -it --rm -v C:\Users\alfre\17349\demo\:/app -v C:\Users\alfre\.m2\:/root/.m2 -p 8080:8080 rrojano/spring-boot
