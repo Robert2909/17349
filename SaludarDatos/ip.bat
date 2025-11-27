@@ -1,0 +1,1 @@
+docker exec -it bd cat /etc/hosts

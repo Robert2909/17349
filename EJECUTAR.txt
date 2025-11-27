@@ -1,0 +1,17 @@
+1. CONTENEDOR DE LA BASE DE DATOS (SOLO LANZAR, SE ABRE EN OTRA TERMINAL PARA OPERARLA)
+docker run -it --rm -p 3306:3306 -v C:\Users\alfre\datos\:/var/lib/mysql --env MARIADB_ROOT_PASSWORD=123 --name=bd mariadb
+
+2. EN OTRA TERMINAL (SERÁ LA TERCERA TERMINAL): OBTENER IP DEL CONTENEDOR DE MARIADB:
+docker exec -it bd cat /etc/hosts
+
+3. CONTENEDOR DEL BACKEND (SEGUNDA TERMINAL)
+
+- Correr imagen:
+docker run -it --rm -v C:\Users\alfre\17349\:/app -v C:\Users\alfre\.m2\:/root/.m2 -p 8080:8080 --env MYSQL_HOST=172.17.0.2 rrojano/spring-boot
+- Exportar ip del contenedor de docker (Esta es la IP común):
+export MYSQL_HOST=172.17.0.2
+- Ejecutar spring:
+./mvnw spring-boot:run
+
+- EN EL CONTENEDOR TERCERO QUE NO ES SPRING NI MARIADB, ABRIR MARIADB:
+docker exec -it bd bash
